@@ -62,7 +62,7 @@ function App() {
   }, [activeImage]);
 
   const navigateImage = (direction: 1 | -1) => {
-    if (activeIndex < 0) {
+    if (activeIndex < 0 || portfolioImages.length === 0) {
       return;
     }
 

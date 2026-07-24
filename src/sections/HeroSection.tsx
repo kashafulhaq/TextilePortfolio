@@ -3,9 +3,11 @@ import { FiArrowRight, FiDownload, FiMail } from 'react-icons/fi';
 import { Container } from '@/components/Container';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { profile } from '@/data/profile';
-import { heroImage } from '@/data/images';
+import { heroImage, fallbackPortfolioImage } from '@/data/images';
 
 export function HeroSection() {
+  const safeHeroImage = heroImage ?? fallbackPortfolioImage;
+
   return (
     <section className="section-shell overflow-hidden pt-4 sm:pt-6 lg:pt-8">
       <Container>
@@ -13,7 +15,7 @@ export function HeroSection() {
           <div className="glass-panel hero-pattern relative overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10">
             <div
               className="absolute inset-0 bg-cover bg-center opacity-20"
-              style={{ backgroundImage: `url(${heroImage.src})` }}
+              style={{ backgroundImage: `url(${safeHeroImage.src})` }}
               aria-hidden="true"
             />
             <div className="relative z-10 flex min-h-[32rem] flex-col justify-between gap-10">
@@ -92,7 +94,7 @@ export function HeroSection() {
             </div>
 
             <div className="relative overflow-hidden rounded-[2rem] border border-charcoal/10 bg-charcoal shadow-soft">
-              <img src={heroImage.src} alt={heroImage.alt} className="h-full w-full object-cover opacity-95" />
+              <img src={safeHeroImage.src} alt={safeHeroImage.alt} className="h-full w-full object-cover opacity-95" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/84 via-charcoal/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 text-ivory">
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.34em] text-gold/90">Featured artwork</p>

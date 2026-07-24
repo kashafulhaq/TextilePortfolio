@@ -45,13 +45,19 @@ export function TechnicalStudiesSection({ onOpenImage }: TechnicalStudiesSection
             </article>
           </Reveal>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            {technical.images.slice(0, 6).map((image, index) => (
-              <Reveal key={image.id} delay={index * 0.04}>
-                <PortfolioCard image={image} onOpen={onOpenImage} compact />
-              </Reveal>
-            ))}
-          </div>
+          {technical.images.length > 0 ? (
+            <div className="grid gap-5 sm:grid-cols-2">
+              {technical.images.slice(0, 6).map((image, index) => (
+                <Reveal key={image.id} delay={index * 0.04}>
+                  <PortfolioCard image={image} onOpen={onOpenImage} compact />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-[2rem] border border-dashed border-charcoal/10 bg-white/70 px-6 py-12 text-center text-sm text-charcoal/60">
+              No replica studies are available right now.
+            </div>
+          )}
         </div>
       </Container>
     </section>

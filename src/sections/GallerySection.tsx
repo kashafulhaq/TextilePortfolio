@@ -78,13 +78,19 @@ export function GallerySection({ onOpenImage }: GallerySectionProps) {
           </div>
         </Reveal>
 
-        <div className="mt-8 masonry-grid gap-5 [column-fill:_balance]">
-          {filteredImages.map((image, index) => (
-            <Reveal key={image.id} delay={(index % 6) * 0.03} className="masonry-item mb-5 inline-block w-full">
-              <PortfolioCard image={image} onOpen={onOpenImage} />
-            </Reveal>
-          ))}
-        </div>
+        {filteredImages.length > 0 ? (
+          <div className="mt-8 masonry-grid gap-5 [column-fill:_balance]">
+            {filteredImages.map((image, index) => (
+              <Reveal key={image.id} delay={(index % 6) * 0.03} className="masonry-item mb-5 inline-block w-full">
+                <PortfolioCard image={image} onOpen={onOpenImage} />
+              </Reveal>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 rounded-[2rem] border border-dashed border-charcoal/10 bg-white/70 px-6 py-12 text-center text-sm text-charcoal/60">
+            No images match the current filter or search query.
+          </div>
+        )}
       </Container>
     </section>
   );

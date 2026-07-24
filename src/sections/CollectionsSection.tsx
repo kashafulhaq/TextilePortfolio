@@ -38,10 +38,18 @@ export function CollectionsSection({ onOpenImage }: CollectionsSectionProps) {
                     <p className="mt-4 text-sm leading-7 text-charcoal/68">{collection.description}</p>
                   </div>
 
-                  <div className="mt-5 grid grid-cols-2 gap-3">
-                    {previewImages.map((image) => (
-                      <PortfolioCard key={image.id} image={image} onOpen={onOpenImage} compact />
-                    ))}
+                  <div className="mt-5">
+                    {previewImages.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-3">
+                        {previewImages.map((image) => (
+                          <PortfolioCard key={image.id} image={image} onOpen={onOpenImage} compact />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="rounded-[1.4rem] border border-dashed border-charcoal/10 bg-white/70 px-4 py-10 text-center text-sm text-charcoal/60">
+                        No images found in this collection yet.
+                      </div>
+                    )}
                   </div>
                 </article>
               </Reveal>

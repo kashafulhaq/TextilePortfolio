@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import type { PortfolioImage } from '@/data/images';
+import { fallbackPortfolioImage, type PortfolioImage } from '@/data/images';
 
 type LightboxProps = {
   image: PortfolioImage | null;
@@ -10,6 +10,8 @@ type LightboxProps = {
 };
 
 export function Lightbox({ image, onClose, onNext, onPrevious }: LightboxProps) {
+  const safeImage = image ?? fallbackPortfolioImage;
+
   return (
     <AnimatePresence>
       {image ? (
@@ -20,7 +22,7 @@ export function Lightbox({ image, onClose, onNext, onPrevious }: LightboxProps) 
           className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/82 px-4 py-6 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label={image.title}
+          aria-label={safeImage.title}
           onClick={onClose}
         >
           <motion.div
@@ -41,15 +43,15 @@ export function Lightbox({ image, onClose, onNext, onPrevious }: LightboxProps) 
             </button>
 
             <div className="relative flex-1 overflow-hidden rounded-[1.5rem] bg-ivory/80">
-              <img src={image.src} alt={image.alt} className="h-full max-h-[75vh] w-full object-contain" />
+              <img src={safeImage.src} alt={safeImage.alt} className="h-full max-h-[75vh] w-full object-contain" />
             </div>
 
             <div className="flex w-full flex-col justify-between gap-4 rounded-[1.5rem] border border-charcoal/5 bg-white/75 p-6 lg:w-[24rem]">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">{image.folderLabel}</p>
-                <h3 className="mt-3 font-serif text-4xl leading-none text-charcoal">{image.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-charcoal/70">{image.folderLabel}</p>
-                <p className="mt-2 text-sm leading-7 text-charcoal/70">{image.tags.join(' · ')}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">{safeImage.folderLabel}</p>
+                <h3 className="mt-3 font-serif text-4xl leading-none text-charcoal">{safeImage.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-charcoal/70">{safeImage.folderLabel}</p>
+                <p className="mt-2 text-sm leading-7 text-charcoal/70">{safeImage.tags.join(' · ')}</p>
               </div>
               <p className="text-sm leading-7 text-charcoal/62">
                 Use this preview to inspect the artwork scale, motif placement, and surface finish. The portfolio is
